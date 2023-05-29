@@ -60,33 +60,17 @@ Node* leftRotate(Node* curr){
 }
 
 Node* balancing(Node* curr){
-    //Update Height nya dulu dari si current
     curr -> height = 1 + getMax(getHeight(curr -> left), getHeight(curr -> right));
-    //Get balance factor
-
-    // printf("Masuk1");
-    //kondisi left-left
     if(getBalanceFactor(curr) > 1 && getBalanceFactor(curr -> left) > 0){
-        //Right Rotate
-    // printf("Masuk2");
         return rightRotate(curr);
     }
-    // kondisi right-right
     if(getBalanceFactor(curr) < -1 && getBalanceFactor(curr -> right)  < 0){
-        
-    // printf("Masuk3");
         return leftRotate(curr);
     }
-
-    //kondisi left-right
     if(getBalanceFactor(curr) > 1 && getBalanceFactor(curr -> left) < 0){
-        
-    // printf("Masuk4");
         curr -> left = leftRotate(curr -> left);
         return rightRotate(curr);
     }
-
-    //kondisi right-left
     if(getBalanceFactor(curr) < -1 && getBalanceFactor(curr -> right) > 0){
         curr -> right = rightRotate(curr -> right);
         return leftRotate(curr);
@@ -104,7 +88,6 @@ Node* insert(Node* curr, Node* newNode){
         curr -> right = insert(curr -> right, newNode);
     }
     return balancing(curr);
-    // return curr;
 }
 
 Node *pop(Node *curr, int key){
@@ -181,7 +164,7 @@ void postOrder(Node* curr){
 }
 int main(){
     struct Node *root = NULL;
-    long int choice, key;
+    int choice, key;
 
     do{
         menu();
@@ -191,12 +174,12 @@ int main(){
         switch(choice){
             case 1:
                 printf("Insert: ");
-                scanf("%ld", &key);
+                scanf("%d", &key);
                 root = insert(root, createNode(key));
                 break;
             case 2:
                 printf("Delete: ");
-                scanf("%ld", &key);
+                scanf("%d", &key);
                 root = pop(root, key);
                 break;
             case 3: 
