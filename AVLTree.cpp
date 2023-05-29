@@ -169,7 +169,7 @@ int main(){
     do{
         menu();
         printf("Choose: ");
-        scanf("%ld", &choice);
+        scanf("%d", &choice);
 
         switch(choice){
             case 1:
@@ -201,4 +201,5 @@ int main(){
                 break;
         }
     }while(choice != 4);
+    return 0;
 }
