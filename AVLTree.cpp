@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 struct Node
@@ -139,27 +138,25 @@ void menu(){
     puts("4. Exit");
 }
 
-void preorder(Node* curr){
-    while(curr != NULL){
-        printf("%d", curr -> key);
-        preorder(curr -> left);
-        preorder(curr -> right);
+void inorder(struct Node *root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->key);
+        inorder(root->right);
     }
 }
-
-void inorder(Node* curr){
-    while(curr != NULL){
-        inorder(curr -> left);
-        printf("%d", curr -> key);
-        inorder(curr -> right);
+void postOrder(struct Node *root) {
+    if (root != NULL) {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("%d ", root->key);
     }
 }
-
-void postOrder(Node* curr){
-    while(curr != NULL){
-        postOrder(curr -> left);
-        postOrder(curr -> right);
-        printf("%d ", curr -> key);
+void preorder(struct Node *root) {
+    if (root != NULL) {
+        printf("%d ", root->key);
+        preorder(root->left);
+        preorder(root->right);
     }
 }
 int main(){
