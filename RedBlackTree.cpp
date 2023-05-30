@@ -116,20 +116,20 @@ void insert(int data) {
     while (current != NULL) {
         parent = current;
 
-        if (newNode->data < current->data)
-            current = current->left;
+        if (newNode->data < current -> data)
+            current = current -> left;
         else
-            current = current->right;
+            current = current -> right;
     }
 
-    newNode->parent = parent;
+    newNode -> parent = parent;
 
     if (parent == NULL)
         root = newNode;
-    else if (newNode->data < parent->data)
-        parent->left = newNode;
+    else if (newNode -> data < parent -> data)
+        parent -> left = newNode;
     else
-        parent->right = newNode;
+        parent -> right = newNode;
 
     fixInsert(newNode);
 }
@@ -138,9 +138,9 @@ void inorderTraversal(struct Node* node) {
     if (node == NULL)
         return;
 
-    inorderTraversal(node->left);
-    printf("%d ", node->data);
-    inorderTraversal(node->right);
+    inorderTraversal(node -> left);
+    printf("%d ", node -> data);
+    inorderTraversal(node -> right);
 }
 
 int main() {
