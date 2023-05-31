@@ -14,15 +14,15 @@ struct Node {
 struct Node* root = NULL;
 
 struct Node* createNode(int data) {
-    struct Node* newNode = (Node*)malloc(sizeof(Node));
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
     newNode->color = RED;
     newNode -> left = newNode -> right = newNode -> parent = NULL;
     return newNode;
 }
 
-void rotateLeft(Node* node) {
-    Node* rightChild = node -> right;
+void rotateLeft(struct Node* node) {
+    struct Node* rightChild = node -> right;
     node -> right = rightChild -> left;
 
     if (node -> right != NULL)
@@ -41,8 +41,8 @@ void rotateLeft(Node* node) {
     node -> parent = rightChild;
 }
 
-void rotateRight(Node* node) {
-    Node* leftChild = node -> left;
+void rotateRight(struct Node* node) {
+    struct Node* leftChild = node -> left;
     node -> left = leftChild -> right;
 
     if (node -> left != NULL)
@@ -61,7 +61,7 @@ void rotateRight(Node* node) {
     node -> parent = leftChild;
 }
 
-void fixInsert(Node* node) {
+void fixInsert(struct Node* node) {
     while (node != root && node -> parent -> color == RED) {
         struct Node* grandparent = node->parent->parent;
         struct Node* uncle;

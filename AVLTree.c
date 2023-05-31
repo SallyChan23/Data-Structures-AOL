@@ -5,19 +5,19 @@ struct Node
 {
     int key;
     int height;
-    Node* left;
-    Node* right;
+    struct Node* left;
+    struct Node* right;
 };
 
-Node* createNode(int key){
-    Node* newNode = (Node*)malloc(sizeof(Node));
+struct Node* createNode(int key){
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode -> key = key;
     newNode -> height = 1;
     newNode -> left = newNode -> right = NULL;
     return newNode;
 }
 
-int getHeight(Node* curr){
+int getHeight(struct Node* curr){
     if(curr == NULL){
         return 0;
     }
@@ -28,13 +28,13 @@ int getMax(int a, int b){
     return a > b ? a : b;
 }
 
-int getBalanceFactor(Node* curr){
+int getBalanceFactor(struct Node* curr){
     return getHeight(curr -> left) - getHeight(curr -> right);
 }
 
-Node* rightRotate(Node* curr){
-    Node* childLeft = curr -> left;
-    Node* subChildLeft = childLeft -> right;
+struct Node* rightRotate(struct Node* curr){
+    struct Node* childLeft = curr -> left;
+    struct Node* subChildLeft = childLeft -> right;
 
     childLeft -> right = curr;
     curr -> left = subChildLeft;
@@ -45,9 +45,9 @@ Node* rightRotate(Node* curr){
     return childLeft;
 }
 
-Node* leftRotate(Node* curr){
-    Node* childRight = curr -> right;
-    Node* subChildRight = childRight -> left;
+struct Node* leftRotate(struct Node* curr){
+    struct Node* childRight = curr -> right;
+    struct Node* subChildRight = childRight -> left;
 
     childRight -> left = curr;
     curr -> right = subChildRight;
@@ -58,7 +58,7 @@ Node* leftRotate(Node* curr){
     return childRight;
 }
 
-Node* balancing(Node* curr){
+struct Node* balancing(struct Node* curr){
     curr -> height = 1 + getMax(getHeight(curr -> left), getHeight(curr -> right));
     if(getBalanceFactor(curr) > 1 && getBalanceFactor(curr -> left) > 0){
         return rightRotate(curr);
@@ -77,7 +77,7 @@ Node* balancing(Node* curr){
     return curr;
 }
 
-Node* insert(Node* curr, Node* newNode){
+struct Node* insert(struct Node* curr, struct Node* newNode){
     if(curr == NULL){
         return newNode;
     }
@@ -89,7 +89,7 @@ Node* insert(Node* curr, Node* newNode){
     return balancing(curr);
 }
 
-Node *pop(Node *curr, int key){
+struct Node *pop(struct Node *curr, int key){
     if(curr == NULL){
         puts("Data Not Found");
         return curr;
@@ -110,7 +110,7 @@ Node *pop(Node *curr, int key){
            curr = NULL;
            return curr;                                                                                                 
     }else if(curr -> left == NULL || curr -> right == NULL){
-        Node* temp;
+        struct Node* temp;
         if(curr -> left != NULL)
             temp = curr -> left;
         else
@@ -119,7 +119,7 @@ Node *pop(Node *curr, int key){
         free(curr);
         curr = temp;
     }else{
-        Node* predeseccor = curr -> left;
+        struct Node* predeseccor = curr -> left;
 
         while(predeseccor -> right != NULL){
             predeseccor = predeseccor -> right;
