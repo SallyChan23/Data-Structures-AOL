@@ -191,6 +191,7 @@ int main(){
                 puts(" ");
                 break;
             case 4:
+                printf("Thank You\n");
                 exit(1);
                 break;
             default:
