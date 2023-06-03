@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//untuk mengisi data
 struct Node
 {
     int key;
@@ -8,7 +9,7 @@ struct Node
     struct Node* left;
     struct Node* right;
 };
-
+//untuk membuat node baru
 struct Node* createNode(int key){
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode -> key = key;
@@ -16,6 +17,7 @@ struct Node* createNode(int key){
     newNode -> left = newNode -> right = NULL;
     return newNode;
 }
+//untuk menghitung banyaknya node
 
 int getHeight(struct Node* curr){
     if(curr == NULL){
@@ -24,13 +26,16 @@ int getHeight(struct Node* curr){
     return curr -> height;
 }
 
+//untuk menghitung banyaknya node
 int getMax(int a, int b){
     return a > b ? a : b;
 }
-
+//untuk menghitung nilai balance tree nya
 int getBalanceFactor(struct Node* curr){
     return getHeight(curr -> left) - getHeight(curr -> right);
 }
+
+// right rotate
 
 struct Node* rightRotate(struct Node* curr){
     struct Node* childLeft = curr -> left;
@@ -45,6 +50,7 @@ struct Node* rightRotate(struct Node* curr){
     return childLeft;
 }
 
+//left rotate
 struct Node* leftRotate(struct Node* curr){
     struct Node* childRight = curr -> right;
     struct Node* subChildRight = childRight -> left;
@@ -58,6 +64,7 @@ struct Node* leftRotate(struct Node* curr){
     return childRight;
 }
 
+//untuk balancing tree
 struct Node* balancing(struct Node* curr){
     curr -> height = 1 + getMax(getHeight(curr -> left), getHeight(curr -> right));
     if(getBalanceFactor(curr) > 1 && getBalanceFactor(curr -> left) > 0){
@@ -77,6 +84,8 @@ struct Node* balancing(struct Node* curr){
     return curr;
 }
 
+//insert tree
+
 struct Node* insert(struct Node* curr, struct Node* newNode){
     if(curr == NULL){
         return newNode;
@@ -89,6 +98,7 @@ struct Node* insert(struct Node* curr, struct Node* newNode){
     return balancing(curr);
 }
 
+//delete tree
 struct Node *pop(struct Node *curr, int key){
     if(curr == NULL){
         puts("Data Not Found");
@@ -137,7 +147,7 @@ void menu(){
     puts("3. Traversal");
     puts("4. Exit");
 }
-
+// traversal postorder, preorder, dan inorder
 void inorder(struct Node *root) {
     if (root != NULL) {
         inorder(root->left);
@@ -145,6 +155,7 @@ void inorder(struct Node *root) {
         inorder(root->right);
     }
 }
+
 void postOrder(struct Node *root) {
     if (root != NULL) {
         postOrder(root->left);
@@ -159,6 +170,7 @@ void preorder(struct Node *root) {
         preorder(root->right);
     }
 }
+//main function
 int main(){
     struct Node *root = NULL;
     int choice, key;
