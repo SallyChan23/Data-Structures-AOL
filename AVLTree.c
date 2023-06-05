@@ -67,16 +67,20 @@ struct Node* leftRotate(struct Node* curr){
 //untuk balancing tree
 struct Node* balancing(struct Node* curr){
     curr -> height = 1 + getMax(getHeight(curr -> left), getHeight(curr -> right));
+    // left -left
     if(getBalanceFactor(curr) > 1 && getBalanceFactor(curr -> left) > 0){
         return rightRotate(curr);
     }
+    // right-right
     if(getBalanceFactor(curr) < -1 && getBalanceFactor(curr -> right)  < 0){
         return leftRotate(curr);
     }
+    //left-right
     if(getBalanceFactor(curr) > 1 && getBalanceFactor(curr -> left) < 0){
         curr -> left = leftRotate(curr -> left);
         return rightRotate(curr);
     }
+    //right-left
     if(getBalanceFactor(curr) < -1 && getBalanceFactor(curr -> right) > 0){
         curr -> right = rightRotate(curr -> right);
         return leftRotate(curr);
