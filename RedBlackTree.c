@@ -13,6 +13,7 @@ struct Node {
 
 struct Node* root = NULL;
 
+//membuat node baru
 struct Node* createNode(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
@@ -21,6 +22,7 @@ struct Node* createNode(int data) {
     return newNode;
 }
 
+//rotasi ke kiri
 void rotateLeft(struct Node* node) {
     struct Node* rightChild = node -> right;
     node -> right = rightChild -> left;
@@ -40,7 +42,7 @@ void rotateLeft(struct Node* node) {
     rightChild -> left = node;
     node -> parent = rightChild;
 }
-
+//rotasi ke kanan
 void rotateRight(struct Node* node) {
     struct Node* leftChild = node -> left;
     node -> left = leftChild -> right;
@@ -60,7 +62,7 @@ void rotateRight(struct Node* node) {
     leftChild -> right = node;
     node -> parent = leftChild;
 }
-
+// fungsi untuk memperbaiki ketika node yang baru dibuat setelah insert
 void fixInsert(struct Node* node) {
     while (node != root && node -> parent -> color == RED) {
         struct Node* grandparent = node->parent->parent;
@@ -107,7 +109,7 @@ void fixInsert(struct Node* node) {
 
     root->color = BLACK;
 }
-
+//fungsi insert
 void insert(int data) {
     struct Node* newNode = createNode(data);
     struct Node* current = root;
@@ -134,6 +136,8 @@ void insert(int data) {
     fixInsert(newNode);
 }
 
+//fungsi inorder
+
 void inorderTraversal(struct Node* node) {
     if (node == NULL)
         return;
@@ -144,6 +148,7 @@ void inorderTraversal(struct Node* node) {
 }
 
 int main() {
+    //contoh insert angka dari soal
     insert(41);
     insert(22);
     insert(5);
@@ -155,7 +160,7 @@ int main() {
     insert(45);
     insert(3);
 
-
+    //untuk mengeluarkan hasil output dalam bentuk inorder
     printf("Inorder traversal: ");
     inorderTraversal(root);
     
